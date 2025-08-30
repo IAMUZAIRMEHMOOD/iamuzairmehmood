@@ -1,206 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Uzair Mehmood - Creative and results-driven Full-Stack Developer portfolio.">
-    <meta name="keywords" content="Uzair Mehmood, Full-Stack Developer, Software Engineer, Portfolio, HTML, CSS, JavaScript, .NET">
-    <meta name="author" content="Uzair Mehmood">
-    <meta property="og:title" content="Uzair Mehmood - Full-Stack Developer">
-    <meta property="og:description" content="Creative and results-driven Full-Stack Developer portfolio website">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com">
-    <meta property="og:image" content="https://yourdomain.com/favicon.ico">
-    <link rel="icon" type="image/x-icon" href="favicon.ico"><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
-            color: #000;
-            transition: background-color 0.3s, color 0.3s;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Uzair Mehmood — Full-Stack Developer</title>
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Spectral:wght@500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-        .dark-mode .card,
-        .dark-mode .btn {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
+  <style>
+    :root{
+      --bg:#f8f9fa; --fg:#0b0d12; --muted:#6c757d; --brand:#0d6efd; --card:#ffffff; --card-border:#e9ecef; --glow: rgba(13,110,253,.22);
+    }
+    body.dark-mode{ --bg:#0e1116; --fg:#ffffff; --muted:#c7d0da; --brand:#4ea1ff; --card:#12151a; --card-border:#22262b; --glow: rgba(78,161,255,.32); }
 
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-top: 2rem;
-            border-bottom: 2px solid #0d6efd;
-            display: inline-block;
-        }
+    html{scroll-behavior:smooth}
+    body{font-family:'Nunito',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; background:var(--bg); color:var(--fg); margin:0; line-height:1.65}
 
-        .contact-inline {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-            margin-top: 1rem;
-        }
+    /* Header */
+    .site-header{padding:2.2rem 0 1rem; text-align:center}
+    .name{font-family:'Spectral',serif; font-weight:500; text-transform:uppercase; margin:0; line-height:1}
+    .name .initial{display:inline-block; font-size:calc(2.6rem + 1.2vw); margin-right:.15rem}
+    .name .rest{font-size:calc(1.6rem + 1.2vw); letter-spacing:.08em}
+    /* Force the title to brand blue and ensure it's below name */
+    .title{font-weight:700; color:var(--brand) !important; margin:.35rem 0 0}
 
-        .contact-inline a {
-            color: inherit;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
+    /* Page nav (sticky) */
+    .page-nav-wrap{position:sticky; top:0; z-index:1050}
+    .page-nav{display:flex; justify-content:center; gap:.25rem; background:transparent; padding:.45rem; transition:background .25s ease, box-shadow .25s ease, backdrop-filter .25s ease}
+    .page-nav.scrolled{backdrop-filter: blur(10px); box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    body.dark-mode .page-nav.scrolled{background:rgba(12,14,18,.6)}
+    body:not(.dark-mode) .page-nav.scrolled{background:rgba(255,255,255,.72)}
+    .page-nav a{display:inline-block; padding:.45rem .85rem; margin:.08rem .2rem; border-radius:999px; text-decoration:none; color:var(--muted); font-weight:700; transition:.18s}
+    .page-nav a.active{background:var(--brand); color:#fff; box-shadow:0 8px 20px var(--glow)}
 
-        .theme-toggle {
-            position: fixed;
-            top: 1rem;
-            right: 1rem;
-            z-index: 1000;
-        }
+    /* Hamburger for small screens */
+    .nav-toggle{display:none; position:fixed; left:12px; top:12px; z-index:1201; border:none; background:transparent; font-size:1.25rem; cursor:pointer; color:var(--fg)}
+    @media (max-width:768px){
+      .page-nav{display:none; flex-direction:column; align-items:center; padding:8px 6px; max-height:0; overflow:hidden; transition:max-height .28s ease}
+      .page-nav.open{display:flex; max-height:420px}
+      .nav-toggle{display:block}
+      .page-nav a{padding:.6rem .9rem; margin:.22rem 0; width:92%; text-align:center}
+    }
 
-        section {
-            animation: fadeInUp 1s;
-        }
+    /* Contact */
+    .contact{display:flex; justify-content:center; flex-wrap:wrap; gap:.6rem; margin-top:1rem}
+    .chip{display:inline-flex; align-items:center; gap:.55rem; padding:.45rem .8rem; border:1px solid var(--card-border); border-radius:999px; background:var(--card); color:var(--fg); text-decoration:none; transition:transform .18s ease, box-shadow .18s ease, background .18s ease}
+    .chip i{width:16px; text-align:center}
+    .chip:hover{transform:translateY(-3px); box-shadow:0 10px 28px var(--glow)}
 
-        header {
-            animation: fadeInDown 1s;
-        }
+    /* Download button inside chips */
+    .chip.download{background:var(--brand); color:#fff; border:0}
+    .chip.download:hover{filter:brightness(.95)}
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+    /* Sections & cards */
+    .container{max-width:980px}
+    .section-title{font-weight:900; font-size:1.28rem; letter-spacing:.06em; text-transform:uppercase; margin:1.8rem 0 1rem; color:var(--brand)}
+    .card{border-radius:12px; background:var(--card); border:1px solid var(--card-border); box-shadow:0 8px 30px rgba(0,0,0,.06); transition:transform .2s ease,box-shadow .2s ease; padding:1rem}
+    .card:hover{transform:translateY(-4px); box-shadow:0 18px 42px var(--glow)}
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    /* Ensure readable text in dark mode */
+    .card, .card p, .card li, .chip, .xp-role, .xp-org, footer{color:var(--fg)}
+    .card a{color:var(--brand)}
+    /* Ensure header title remains brand color regardless of later rules */
+    .site-header .title{color:var(--brand) !important}
+
+    /* Experience */
+    .xp-item + .xp-item{margin-top:1rem}
+    .xp-head{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap}
+    .xp-left{min-width:0; flex:1 1 0%}
+    .xp-role{font-weight:800; font-size:1.06rem}
+    .xp-org{display:block; color:var(--muted); font-weight:600}
+    .xp-date{font-weight:700; color:var(--brand); white-space:nowrap; margin-left:auto; flex-shrink: 0;}
+
+    /* Row style for education/certificate items */
+    .row-item{display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; flex-wrap:wrap; border-bottom:0px solid transparent; padding:.35rem 0}
+    .row-item .left{min-width:0; flex:1 1 0%}
+    .row-item .title-strong{font-weight:700}
+    .row-item .meta{color:var(--muted); margin-top:.15rem}
+    .row-item .date-right{font-weight:700; color:var(--brand); white-space:nowrap; flex-shrink: 0;}
+
+    /* Projects */
+    .proj h5{font-weight:800; font-size:1.02rem}
+    .proj ul{margin:.45rem 0}
+
+    /* Skills - plain list */
+    .skills li{margin-bottom:.45rem}
+
+    /* Footer */
+    footer{text-align:center; margin:2rem 0 1rem; color:var(--muted)}
+    .heart{color:#ff2b4a; font-size:0.78rem}
+
+    /* Floating */
+    .theme-toggle{position:fixed; top:10px; right:12px; z-index:1202; width:46px; height:46px; border-radius:50%; border:1px solid var(--card-border); background:var(--card); color:var(--fg); display:flex; align-items:center; justify-content:center; cursor:pointer}
+    .scroll-up{
+        position:fixed;
+        bottom:1.6rem;
+        right:1.6rem;
+        z-index:1100;
+        width:46px;
+        height:46px;
+        border:none;
+        border-radius:50%;
+        background:var(--brand);
+        color:#fff;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        box-shadow: 0 4px 12px rgba(0,0,0,.2);
+        transition: background .2s ease, box-shadow .2s ease;
+    }
+    body.dark-mode .scroll-up {
+        background:var(--brand);
+        box-shadow: 0 4px 12px rgba(255,255,255,.12);
+    }
+    .scroll-up:hover {
+        opacity: 0.9;
+        box-shadow: 0 6px 16px rgba(0,0,0,.3);
+    }
+    body.dark-mode .scroll-up:hover {
+        box-shadow: 0 6px 16px rgba(255,255,255,.2);
+    }
+
+    /* Loader centered */
+    #loader{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.5);z-index:2000}
+    #loader .card{min-width:260px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem}
+    #loader .spinner-border{width:3rem;height:3rem}
+
+    /* Scroll offset for anchors */
+    section{scroll-margin-top:100px}
+  </style>
 </head>
-
 <body>
-    <button class="btn btn-secondary theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-    <div class="container py-5">
-        <header class="text-center mb-4 animate__animated animate__fadeInDown">
-            <h1 class="fw-bold">Uzair Mehmood</h1>
-            <p class="lead">Full-Stack Developer</p>
-            <div class="contact-inline">
-                <a href="https://www.linkedin.com/in/iamuzairmehmood" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="tel:+923110240059"><i class="fas fa-phone"></i> +92 311-0240059</a>
-                <a href="mailto:uzairmehmood480@yahoo.com"><i class="fas fa-envelope"></i> uzairmehmood480@yahoo.com</a>
-                <a href="https://github.com/iamuzairmehmood" target="_blank"><i class="fab fa-github"></i> GitHub</a>
-            </div>
-            <a href="Resume-Uzair Mehmood.pdf" class="btn btn-primary mt-3" download><i class="fas fa-download"></i> Download PDF</a>
-        </header>
+  <!-- Theme toggle -->
+  <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme"><i id="themeIcon" class="fa-solid fa-moon"></i></button>
 
-        <section>
-            <h2 class="section-title">Objective</h2>
-            <p>Creative and results-driven Full-stack developer with strong communication skills and a passion for building robust, scalable, and user-friendly applications. Committed to delivering high-quality solutions and contributing to team success.</p>
-        </section>
+  <div class="container py-4">
+    <!-- Header -->
+    <header class="site-header">
+      <h1 class="name">
+        <span class="initial">U</span><span class="rest">ZAIR</span>
+        &nbsp;
+        <span class="initial">M</span><span class="rest">EHMOOD</span>
+      </h1>
+      <p class="title">Full Stack Developer</p>
 
-        <section>
-            <h2 class="section-title">Skills</h2>
-            <ul>
-                <li><strong>Languages:</strong> HTML, XHTML, CSS, Bootstrap, JavaScript, SQL, C#, Shell scripting</li>
-                <li><strong>Technologies:</strong> ASP.NET MVC, Entity Framework Core, FFMPEG</li>
-                <li><strong>Tools:</strong> VS Code, Visual Studio, SSMS, Git, GitHub, Blogger</li>
-                <li><strong>Databases:</strong> SQL Server</li>
-            </ul>
-        </section>
+      <nav class="contact mt-3" aria-label="contact links">
+        <a class="chip" target="_blank" href="https://www.linkedin.com/in/iamuzairmehmood"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+        <a class="chip" target="_blank" href="https://wa.me/+923110240059"><i class="fa-solid fa-phone"></i> +92 311-0240059</a>
+        <a class="chip" href="mailto:uzairmehmood480@yahoo.com"><i class="fa-solid fa-envelope"></i> Email</a>
+        <a class="chip" target="_blank" href="https://github.com/iamuzairmehmood"><i class="fa-brands fa-github"></i> GitHub</a>
+        <!-- Download button inside contact chips -->
+        <button class="chip download" id="btnDownload"><i class="fa-solid fa-file-arrow-down"></i> Download PDF</button>
+      </nav>
+    </header>
 
-        <section>
-            <h2 class="section-title">Experience</h2>
-            <p><strong>Intern, Interns.Pk (Remote)</strong> – 05/2025 – Present</p>
-            <ul>
-                <li>Hands-on internship focused on real-world front-end development challenges.</li>
-                <li>Experience in designing and building responsive web interfaces.</li>
-                <li>Tech Stack: HTML, HTML5, CSS, Responsive Layouts.</li>
-            </ul>
-
-            <p><strong>Backend Developer - Trainee, Softech Worldwide, Karachi</strong> – 2 Weeks</p>
-            <ul>
-                <li>Developed a C# library using FFMPEG to transform video content.</li>
-                <li>Worked with Microsoft Azure, Graph QL, and Microsoft Video Indexer.</li>
-                <li>Tech Stack: C#, .NET, FFMPEG, Microsoft Azure.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2 class="section-title">Projects</h2>
-            <p><strong><a href="https://github.com/IAMUZAIRMEHMOOD/SM-Management-System" target="_blank">Store Management System</a></strong> – 2023</p>
-            <ul>
-                <li>Windows application using C# (.NET) and SQL Server.</li>
-                <li>Modules for employees, products, suppliers, orders, and deliveries.</li>
-                <li>Optimized Stored Procedures and SSMS for performance.</li>
-            </ul>
-
-            <p><strong><a href="https://ftrfolio.blogspot.com/" target="_blank">Company’s Portfolio</a></strong> – 05/2025</p>
-            <ul>
-                <li>Responsive website using HTML, CSS, JavaScript, Bootstrap, and Blogger.</li>
-                <li>Fast loading, mobile-friendly design.</li>
-            </ul>
-        </section>
-
-        <section>
-            <h2 class="section-title">Education</h2>
-            <p><strong>Bachelor of Software Engineering</strong>, Bahria University, Karachi – 2023<br>
-                CGPA: 3.07</p>
-        </section>
-
-        <section>
-            <h2 class="section-title">Certificates</h2>
-            <p><strong>Management and Leadership Development</strong>, National Institute of Labor Administration, Karachi – 2021 (3 Days)</p>
-            <ul>
-                <li>Conflict resolution, team & project management, leadership training.</li>
-            </ul>
-        </section>
+    <!-- Sticky anchor nav with hamburger -->
+    <div class="page-nav-wrap">
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+      <nav class="page-nav" role="navigation" aria-label="Page sections">
+        <a href="#objective" class="nav-link">Objective</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#experience" class="nav-link">Experience</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#certificates" class="nav-link">Certificates</a>
+        <a href="#education" class="nav-link">Education</a>
+      </nav>
     </div>
 
-    <footer class="text-center py-4 mt-5 border-top">
-        <p class="mb-0">&copy; 2025 IAMUZAIRMEHMOOD. All rights reserved. | Designed with ❤️ by IAMUZAIRMEHMOOD</p>
+    <!-- Objective -->
+    <section id="objective" class="reveal">
+      <h3 class="section-title">Objective</h3>
+      <div class="card">
+        <p class="mb-0">Detail-oriented Full Stack Dot NET Developer skilled in C#, Windows Forms, and SQL Server, delivering scalable, data-driven applications that improve business efficiency. Experienced in ERP support and IT services and currently expanding knowledge in Data Science through the IBM Data Analyst Professional Certificate, with the goal of integrating analytics into future full-stack solutions.</p>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="reveal">
+      <h3 class="section-title">Skills</h3>
+      <div class="card">
+        <ul class="mb-0 skills">
+          <li><strong>Languages:</strong> C# | Dot NET | Structured Query Language | HTML5 | CSS3 | Bootstrap | JavaScript</li>
+          <li><strong>Tools:</strong> VS Code | Visual Studio | SQL Server Management Studio (SSMS) | Git | GitHub | Excel</li>
+          <li><strong>Databases:</strong> Microsoft SQL Server | MySQL</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" class="reveal">
+      <h3 class="section-title">Experience</h3>
+      <div class="card">
+
+        <div class="xp-item">
+          <div class="xp-head">
+            <div class="xp-left">
+              <div class="xp-role">IT &amp; ERP Support</div>
+              <div class="xp-org">Al-Mustafa Trust</div>
+            </div>
+            <div class="xp-date">Aug 2025 - Present</div>
+          </div>
+          <ul>
+            <li>Managed ERP systems and delivered IT support to ensure reliable operations and efficient workflows.</li>
+          </ul>
+        </div>
+
+        <div class="xp-item">
+          <div class="xp-head">
+            <div class="xp-left">
+              <div class="xp-role">Full–Stack Developer</div>
+              <div class="xp-org">Freelance / Client work</div>
+            </div>
+            <div class="xp-date">Aug 2025</div>
+          </div>
+          <ul>
+            <li>Customized websites using WordPress with the Inxterio theme and Elementor for a responsive, client-focused design – maxco.pk</li>
+            <li><strong>Tech Stack:</strong> WordPress, Inxterio, Elementor, HTML, CSS</li>
+          </ul>
+        </div>
+
+        <div class="xp-item">
+          <div class="xp-head">
+            <div class="xp-left">
+              <div class="xp-role">Front-End Developer Intern</div>
+              <div class="xp-org">Interns.Pk (Remote)</div>
+            </div>
+            <div class="xp-date">May 2025 – Jul 2025</div>
+          </div>
+          <ul>
+            <li>Participating in a hands-on internship focused on real-world front-end development challenges.</li>
+            <li>Gaining practical experience in designing and building responsive web interfaces.</li>
+            <li><strong>Tech Stack:</strong> HTML, HTML5, CSS, Responsive Layouts</li>
+          </ul>
+        </div>
+
+        <div class="xp-item">
+          <div class="xp-head">
+            <div class="xp-left">
+              <div class="xp-role">Backend Developer - Trainee</div>
+              <div class="xp-org">Softech Worldwide</div>
+            </div>
+            <div class="xp-date">2 Weeks</div>
+          </div>
+          <ul>
+            <li>Developed a C# library using FFMPEG to transform video content.</li>
+            <li>Implemented solutions using Microsoft Azure, GraphQL, and Microsoft Video Indexer.</li>
+            <li><strong>Tech Stack:</strong> C#, .NET, FFMPEG, Microsoft Azure, Git, GitHub</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="reveal">
+      <h3 class="section-title">Projects</h3>
+      <div class="card proj">
+        <div class="row-item mb-3">
+            <div class="left">
+                <h5>Store Management System — <a target="_blank" href="https://github.com/IAMUZAIRMEHMOOD/SM-Management-System">GitHub</a></h5>
+                <ul>
+                    <li>Built a Windows-based Store Management System using C# (.NET Framework) and SQL Server with modules for employees, products and orders.</li>
+                    <li>Optimized performance and usability through stored procedures, SSMS database management, and a user-friendly interface.</li>
+                    <li><strong>Tech Stack:</strong> C# – Dot NET, SQL Server, SSMS, Windows Forms Application</li>
+                </ul>
+            </div>
+             <div class="date-right"><!--Project Date--></div> 
+        </div>
+        <div class="row-item">
+            <div class="left">
+                <h5>Company’s Portfolio — <a target="_blank" href="https://ftrfolio.blogspot.com/">Website</a></h5>
+                <ul>
+                    <li>Built a responsive portfolio website using HTML, CSS and JavaScript.</li>
+                    <li><strong>Tech Stacks:</strong> HTML, CSS, CDN Bootstrap, JavaScript, Font Awesome, Blogger.</li>
+                </ul>
+            </div>
+            <div class="date-right"><!--Project Date--></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Certificates -->
+    <section id="certificates" class="reveal">
+      <h3 class="section-title">Certificates</h3>
+      <div class="card">
+        <div class="row-item">
+          <div class="left">
+            <div class="title-strong">IBM Data Analyst Professional Certificate</div>
+		<div class="xp-org">NAVTTC</div>
+            <div class="meta">Trained in SQL, Python, Excel, and data visualization with Power BI and Tableau. <strong>(In Progress)</strong></div>
+          </div>
+          <div class="date-right">Sep 2025 - Present</div>
+        </div>
+
+        <div class="row-item">
+          <div class="left">
+            <div class="title-strong">Management and Leadership Development</div>
+	     <div class="xp-org">National Institute of Labor Administration</div>
+            <div class="meta">Trained in conflict resolution, team and project management, leadership, and effective power utilization.</div>
+          </div>
+          <div class="date-right">2021 - 3 Days</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education (Bachelor inline date & dates right) -->
+    <section id="education" class="reveal">
+      <h3 class="section-title">Education</h3>
+      <div class="card">
+        <div class="row-item">
+          <div class="left">
+            <div class="title-strong">Bachelor of Software Engineering — Bahria University, Karachi</div>
+            <div class="meta">Graduated with a solid foundation in software development, problem-solving, and emerging technologies. | <strong>CGPA: 3.07</strong></div>
+         </div>
+	<div class="date-right">2017-2023</div>
+        </div>
+        <div class="row-item">
+          <div class="left">
+            <div class="title-strong">Higher Secondary School Certificate — SM Govt Science College</div>
+            <div class="meta">Inter-mediate in Pre-Engineering.</div>
+          </div>
+          <div class="date-right">2015-2017</div>
+        </div>
+
+        <div class="row-item">
+          <div class="left">
+            <div class="title-strong">Secondary School Certificate — The Educators</div>
+            <div class="meta">Matric in Science.</div>
+          </div>
+          <div class="date-right">2013-2015</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="mb-0">© 2025 Uzair Mehmood. All rights reserved-Designed with <span class="heart">❤</span> by Uzair Mehmood</p>
     </footer>
 
-    <button onclick="scrollToTop()" class="btn btn-primary position-fixed animate__animated animate__pulse animate__infinite" title="Go to top" style="bottom: 2rem; right: 2rem; display: none; z-index: 999;" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+  </div>
 
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
+  <!-- Scroll to top -->
+  <button class="scroll-up" id="scrollUp" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+  <!-- Loader for Download -->
+  <div id="loader">
+    <div class="card p-3 text-center">
+      <div class="mb-2"><i class="fa-solid fa-file-arrow-down fa-2x"></i></div>
+      <div class="spinner-border" role="status" aria-hidden="true"></div>
+      <p class="mt-3 mb-0">Preparing download…</p>
+    </div>
+  </div>
+
+  <script>
+    // Automatically set dark mode after sunset (using a fixed time for simplicity)
+    (function autoTheme() {
+        const hour = new Date().getHours();
+        const sunsetHour = 19; // 7 PM
+        const isCurrentlyDark = document.body.classList.contains('dark-mode');
+        const savedTheme = localStorage.getItem('theme');
+
+        if (hour >= sunsetHour && savedTheme === null) {
+            document.body.classList.add('dark-mode');
+            const themeIcon = document.getElementById('themeIcon');
+            if (themeIcon) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
         }
-            window.addEventListener('scroll', function () {
-            const btn = document.getElementById('backToTop');
-            if (window.scrollY > 300) {
-                btn.style.display = 'block';
-            } else {
-                btn.style.display = 'none';
+    })();
+
+    // Ensure nav starts from objective on load and only objective active
+    window.addEventListener('load', () => {
+      window.scrollTo({top:0});
+      const navLinks = document.querySelectorAll('.page-nav a');
+      navLinks.forEach(a => a.classList.remove('active'));
+      const obj = document.querySelector('.page-nav a[href="#objective"]');
+      if(obj) obj.classList.add('active');
+    });
+
+    // Manual theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    themeToggle && themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      themeIcon.classList.toggle('fa-moon');
+      themeIcon.classList.toggle('fa-sun');
+      localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+    });
+
+    // Check localStorage for saved theme on page load.
+    (function(){ const saved = localStorage.getItem('theme'); if(saved==='dark'){ document.body.classList.add('dark-mode'); if(themeIcon) { themeIcon.classList.remove('fa-moon'); themeIcon.classList.add('fa-sun'); } } })();
+
+    // scroll up
+    const up = document.getElementById('scrollUp');
+    window.addEventListener('scroll', ()=>{ up.style.display = window.scrollY > 300 ? 'flex' : 'none'; });
+    up.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
+
+    // reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); } }) }, {threshold:0.12});
+    revealEls.forEach(el=>io.observe(el));
+
+    // Improved navbar highlighting using IntersectionObserver
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.page-nav a');
+    const nav = document.querySelector('.page-nav');
+
+    // Options for the IntersectionObserver
+    const observerOptions = {
+        root: null, // relative to the viewport
+        rootMargin: '0px 0px -50% 0px', // check when the top of the section hits the middle of the viewport
+        threshold: 0 // A single point threshold
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Remove 'active' from all links
+                navLinks.forEach(link => link.classList.remove('active'));
+                // Add 'active' to the link corresponding to the intersecting section
+                const link = document.querySelector(`.page-nav a[href="#${entry.target.id}"]`);
+                if (link) {
+                    link.classList.add('active');
+                }
             }
         });
+    }, observerOptions);
 
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // add blur class when page nav sticks to top
+    const pageNavWrap = document.querySelector('.page-nav-wrap');
+    window.addEventListener('scroll', () => {
+      const navTopOffset = pageNavWrap.getBoundingClientRect().top + window.scrollY;
+      if (window.scrollY >= navTopOffset) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    });
+
+    // Mobile nav toggle (optimized)
+    const navToggle = document.getElementById('navToggle');
+    navToggle && navToggle.addEventListener('click', () => {
+      const opened = nav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', opened);
+      navToggle.innerHTML = opened ? '<i class="fa-solid fa-xmark"></i>' : '<i class="fa-solid fa-bars"></i>';
+      // animate height for smooth open
+      if(opened){ nav.style.maxHeight = '420px'; } else { nav.style.maxHeight = null; }
+    });
+    // Close mobile nav after clicking link
+    document.querySelectorAll('.page-nav a').forEach(a=>a.addEventListener('click', ()=>{ if(window.innerWidth<=768) { nav.classList.remove('open'); nav.style.maxHeight = null; navToggle.setAttribute('aria-expanded', 'false'); navToggle.innerHTML = '<i class="fa-solid fa-bars"></i>'; } }));
+
+    // Download button behavior: show loader 1s then redirect to provided link (faster)
+    const loader = document.getElementById('loader');
+    const btnDownload = document.getElementById('btnDownload');
+    const downloadLink = 'https://iamuzairmehmood.github.io/iamuzairmehmood/Resume-Uzair%20Mehmood.pdf';
+    btnDownload && btnDownload.addEventListener('click', ()=>{
+      loader.style.display = 'flex';
+      setTimeout(()=>{ loader.style.display = 'none'; window.open(downloadLink, '_blank'); }, 1000);
+    });
+  </script>
 </body>
-
 </html>
